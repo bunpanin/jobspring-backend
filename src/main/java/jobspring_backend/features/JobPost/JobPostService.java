@@ -2,6 +2,7 @@ package jobspring_backend.features.JobPost;
 
 
 import jobspring_backend.features.JobPost.dto.request.JobPostRequest;
+import jobspring_backend.features.JobPost.dto.request.JobPostUpdate;
 import jobspring_backend.features.JobPost.dto.respone.JobPostResponse;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public interface JobPostService {
 
     JobPostResponse updateJobPost(
             UUID id,
-            JobPostRequest request,
+            JobPostUpdate request,
             String authenticatedUserId
     );
 

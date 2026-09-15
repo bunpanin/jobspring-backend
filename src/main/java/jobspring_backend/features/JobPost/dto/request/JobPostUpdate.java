@@ -1,9 +1,11 @@
 package jobspring_backend.features.JobPost.dto.request;
+
 import jakarta.validation.constraints.*;
 import jobspring_backend.domain.EmploymentType;
 import jobspring_backend.domain.JobPostStatus;
 import jobspring_backend.domain.WorkMode;
 import lombok.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -12,7 +14,11 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class JobPostRequest {
+public class JobPostUpdate {
+    
+    @NotBlank(message = "Job code is required")
+    @Size(max = 50, message = "Job code cannot exceed 50 characters")
+    private String jobCode;
 
     @NotBlank(message = "Job title is required")
     @Size(max = 200, message = "Title cannot exceed 200 characters")
@@ -55,6 +61,4 @@ public class JobPostRequest {
 
     @NotNull(message = "Application deadline is required")
     private LocalDateTime applicationDeadline;
-
-
 }

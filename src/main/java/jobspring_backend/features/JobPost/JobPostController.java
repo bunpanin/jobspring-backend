@@ -1,6 +1,7 @@
 package jobspring_backend.features.JobPost;
 import jakarta.validation.Valid;
 import jobspring_backend.features.JobPost.dto.request.JobPostRequest;
+import jobspring_backend.features.JobPost.dto.request.JobPostUpdate;
 import jobspring_backend.features.JobPost.dto.respone.JobPostResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -59,7 +60,7 @@ public class JobPostController {
     public ResponseEntity<JobPostResponse> updateJobPost(
             @PathVariable UUID id,
             @RequestHeader("X-User-Id") String authenticatedUserId,
-            @Valid @RequestBody JobPostRequest request
+            @Valid @RequestBody JobPostUpdate request
     ) {
         return ResponseEntity.ok(
                 jobPostService.updateJobPost(

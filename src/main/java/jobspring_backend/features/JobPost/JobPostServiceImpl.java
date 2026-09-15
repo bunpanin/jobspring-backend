@@ -2,6 +2,7 @@ package jobspring_backend.features.JobPost;
 import jobspring_backend.domain.JobPost;
 import jobspring_backend.domain.JobPostStatus;
 import jobspring_backend.features.JobPost.dto.request.JobPostRequest;
+import jobspring_backend.features.JobPost.dto.request.JobPostUpdate;
 import jobspring_backend.features.JobPost.dto.respone.JobPostResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -61,19 +65,11 @@ public class JobPostServiceImpl implements JobPostService {
     public JobPostResponse createJobPost(JobPostRequest request, String authenticatedUserId) {
 
         validateAuthenticatedUserId(authenticatedUserId);
-        validateSalary(request);
+        validateSalary(request.getMinimumSalary(),request.getMaximumSalary());
 
-        String jobCode = normalizeJobCode(request.getJobCode());
-
-        if (jobPostRepository.existsByJobCode(jobCode)) {
-            throw new ResponseStatusException(
-                    HttpStatus.CONFLICT,
-                    "Job code already exists"
-            );
-        }
 
         JobPost jobPost = JobPost.builder()
-                .jobCode(jobCode)
+                .jobCode(generateJobCode())
                 .title(request.getTitle().trim())
                 .description(request.getDescription())
                 .responsibilities(request.getResponsibilities())
@@ -88,9 +84,9 @@ public class JobPostServiceImpl implements JobPostService {
                 .numberOfPositions(request.getNumberOfPositions())
                 .jobPostStatus(request.getJobPostStatus())
                 .createdByUserId(authenticatedUserId)
-                .createdAt(LocalDateTime.now())
+                .createdAt(dateTimeNow())
                 .applicationDeadline(request.getApplicationDeadline())
-                .publishedAt(LocalDateTime.now())
+                .publishedAt(dateTimeNow())
                 .build();
 
         JobPost savedJobPost = jobPostRepository.save(jobPost);
@@ -98,10 +94,10 @@ public class JobPostServiceImpl implements JobPostService {
     }
 
     @Override
-    public JobPostResponse updateJobPost(UUID id, JobPostRequest request, String authenticatedUserId) {
+    public JobPostResponse updateJobPost(UUID id, JobPostUpdate request, String authenticatedUserId) {
 
         validateAuthenticatedUserId(authenticatedUserId);
-        validateSalary(request);
+        validateSalary(request.getMinimumSalary(),request.getMaximumSalary());
 
         JobPost jobPost = findOwnedJobPost(id, authenticatedUserId);
 
@@ -114,7 +110,6 @@ public class JobPostServiceImpl implements JobPostService {
             );
         }
 
-        jobPost.setJobCode(jobCode);
         jobPost.setTitle(request.getTitle().trim());
         jobPost.setDescription(request.getDescription());
         jobPost.setResponsibilities(request.getResponsibilities());
@@ -129,7 +124,7 @@ public class JobPostServiceImpl implements JobPostService {
         jobPost.setNumberOfPositions(request.getNumberOfPositions());
         jobPost.setApplicationDeadline(request.getApplicationDeadline());
         jobPost.setJobPostStatus(request.getJobPostStatus());
-        jobPost.setUpdatedAt(LocalDateTime.now());
+        jobPost.setUpdatedAt(dateTimeNow());
 
         JobPost updatedJobPost = jobPostRepository.save(jobPost);
 
@@ -158,21 +153,12 @@ public class JobPostServiceImpl implements JobPostService {
 
     private void validateAuthenticatedUserId(String userId) {
         if (userId == null || userId.isBlank()) {
-            throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED,
-                    "Authenticated user is required"
-            );
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Authenticated user is required");
         }
     }
 
-    private void validateSalary(JobPostRequest request) {
-        BigDecimal minimumSalary = request.getMinimumSalary();
-        BigDecimal maximumSalary = request.getMaximumSalary();
-
-        if (
-                minimumSalary != null
-                        && maximumSalary != null
-                        && maximumSalary.compareTo(minimumSalary) < 0
+    private void validateSalary(BigDecimal minimumSalary, BigDecimal maximumSalary) {
+        if (minimumSalary != null && maximumSalary != null && maximumSalary.compareTo(minimumSalary) < 0
         ) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST,
@@ -182,14 +168,23 @@ public class JobPostServiceImpl implements JobPostService {
     }
 
     private String normalizeJobCode(String jobCode) {
-        return jobCode
-                .trim()
-                .toUpperCase(Locale.ROOT);
+        return jobCode.trim().toUpperCase(Locale.ROOT);
     }
 
     private String normalizeCurrency(String currency) {
-        return currency
-                .trim()
-                .toUpperCase(Locale.ROOT);
+        return currency.trim().toUpperCase(Locale.ROOT);
+    }
+
+    private String generateJobCode() {
+        DateTimeFormatter formatter =
+                DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+
+        return "JOBPOST-" + ZonedDateTime
+                .now(ZoneId.of("Asia/Phnom_Penh"))
+                .format(formatter);
+    }
+
+    private LocalDateTime dateTimeNow() {
+        return LocalDateTime.now(ZoneId.of("Asia/Phnom_Penh"));
     }
 }
