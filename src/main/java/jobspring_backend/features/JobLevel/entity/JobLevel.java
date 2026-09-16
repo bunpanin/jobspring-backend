@@ -1,7 +1,9 @@
 package jobspring_backend.features.JobLevel.entity;
 import jakarta.persistence.*;
+import jobspring_backend.features.Candidate.entity.Candidate;
 import lombok.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "job_levels")
@@ -28,4 +30,7 @@ public class JobLevel {
 
     @Column(name = "status")
     private Boolean status;
+
+    @OneToMany(mappedBy = "jobLevel")
+    private List<Candidate> candidates;
 }

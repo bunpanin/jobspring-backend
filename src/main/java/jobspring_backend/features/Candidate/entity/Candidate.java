@@ -21,7 +21,7 @@ public class Candidate {
     private Long candidateId;
 
     @Column(name = "user_id", nullable = false, unique = true)
-    private Long userId;
+    private String userId;
 
     @Column(length = 20, nullable = true)
     private String gender;
@@ -63,4 +63,13 @@ public class Candidate {
     @Column(columnDefinition = "TEXT", nullable = true)
     private String description;
 
+    private boolean isDeleted;
+
+    private LocalDate createdAt;
+
+    @PrePersist
+    public  void  prePersist() {
+        createdAt = LocalDate.now();
+        isDeleted = false;
+    }
 }
