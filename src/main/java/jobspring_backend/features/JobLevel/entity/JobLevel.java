@@ -1,6 +1,7 @@
 package jobspring_backend.features.JobLevel.entity;
 import jakarta.persistence.*;
 import jobspring_backend.features.Candidate.entity.Candidate;
+import jobspring_backend.features.WorkExperience.entity.WorkExperience;
 import lombok.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -33,4 +34,7 @@ public class JobLevel {
 
     @OneToMany(mappedBy = "jobLevel")
     private List<Candidate> candidates;
+
+    @OneToMany(mappedBy = "jobLevel")
+    private  List<WorkExperience> workExperiences;
 }

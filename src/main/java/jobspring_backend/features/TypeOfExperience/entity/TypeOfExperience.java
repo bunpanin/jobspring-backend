@@ -1,7 +1,9 @@
 package jobspring_backend.features.TypeOfExperience.entity;
 import jakarta.persistence.*;
+import jobspring_backend.features.WorkExperience.entity.WorkExperience;
 import lombok.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "type_of_experiences")
@@ -27,6 +29,9 @@ public class TypeOfExperience {
 
     @Column(name = "is_deleted")
     private Boolean isDeleted;
+
+    @OneToMany(mappedBy = "typeOfExperience")
+    private List<WorkExperience> workExperiences;
 
     @PrePersist
     public void prePersist() {

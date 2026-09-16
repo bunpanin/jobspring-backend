@@ -2,9 +2,11 @@ package jobspring_backend.features.Candidate.entity;
 
 import jakarta.persistence.*;
 import jobspring_backend.features.JobLevel.entity.JobLevel;
+import jobspring_backend.features.WorkExperience.entity.WorkExperience;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "Candidate")
@@ -66,6 +68,10 @@ public class Candidate {
     private boolean isDeleted;
 
     private LocalDate createdAt;
+
+    // Raletionship with WorkExperience
+    @OneToMany(mappedBy = "candidate")
+    private List<WorkExperience> workExperiences;
 
     @PrePersist
     public  void  prePersist() {
