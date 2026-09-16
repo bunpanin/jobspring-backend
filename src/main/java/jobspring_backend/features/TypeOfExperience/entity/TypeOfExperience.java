@@ -1,0 +1,36 @@
+package jobspring_backend.features.TypeOfExperience.entity;
+import jakarta.persistence.*;
+import lombok.*;
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "type_of_experiences")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class TypeOfExperience {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "type_of_experience_id")
+    private Long typeOfExperienceId;
+
+    @Column(name = "name", length = 100, nullable = false)
+    private String name;
+
+    @Column(name = "created_by", length = 100)
+    private String createdBy;
+
+    @Column(name = "created_date")
+    private LocalDate createdDate;
+
+    @Column(name = "is_deleted")
+    private Boolean isDeleted;
+
+    @PrePersist
+    public void prePersist() {
+        createdDate = LocalDate.now();
+        isDeleted = false;
+    }
+}
