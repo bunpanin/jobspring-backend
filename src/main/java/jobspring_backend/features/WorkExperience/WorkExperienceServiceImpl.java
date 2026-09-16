@@ -31,36 +31,31 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
     @Override
     @Transactional
     public WorkExperienceResponse create(CreateWorkExperienceRequest request) {
-        Candidate candidate = findCandidate(request.candidateId());
-
-        JobLevel jobLevel = null;
-        if (request.jobLevelId() != null) {
-            jobLevel = findJobLevel(request.jobLevelId());
-        }
-
-        TypeOfExperience typeOfExperience = null;
-        if (request.typeOfExperienceId() != null) {
-            typeOfExperience = findTypeOfExperience(request.typeOfExperienceId());
-        }
-
-        validateDates(request.startDate(), request.endDate(), request.isCurrent());
-
-        WorkExperience workExperience = WorkExperience.builder().candidate(candidate)
-            .jobTitle(trim(request.jobTitle()))
-            .jobLevel(jobLevel)
-            .companyName(request.companyName().trim())
-            .typeOfExperience(typeOfExperience)
-            .city(trim(request.city()))
-            .country(trim(request.country()))
-            .createdBy(request.createdBy())
-            .startDate(request.startDate())
-            .endDate(Boolean.TRUE.equals(request.isCurrent()) ? null : request.endDate())
-            .isCurrent(Boolean.TRUE.equals(request.isCurrent()))
-            .jobResponsibility(request.jobResponsibility())
-            .build();
-
+        WorkExperience workExperience = buildWorkExperience(request);
         WorkExperience saved = workExperienceRepository.save(workExperience);
         return mapToResponse(saved);
+
+    }
+
+    @Override
+    @Transactional
+    public List<WorkExperienceResponse> createMultiple(List<CreateWorkExperienceRequest> requests) {
+        if (requests == null || requests.isEmpty()) {
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "Work experiences are required"
+            );
+        }
+
+        List<WorkExperience> workExperiences = requests.stream()
+            .map(this::buildWorkExperience)
+            .toList();
+
+        return workExperienceRepository
+            .saveAll(workExperiences)
+            .stream()
+            .map(this::mapToResponse)
+            .toList();
     }
 
     @Override
@@ -246,5 +241,34 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
                 workExperience.getCreatedBy(),
                 workExperience.getCreatedDate()
         );
+    }
+
+    private WorkExperience buildWorkExperience(CreateWorkExperienceRequest request) {
+        Candidate candidate = findCandidate(request.candidateId());
+        JobLevel jobLevel = null;
+        if (request.jobLevelId() != null) {
+            jobLevel = findJobLevel(request.jobLevelId());
+        }
+
+        TypeOfExperience typeOfExperience = null;
+        if (request.typeOfExperienceId() != null) {
+            typeOfExperience = findTypeOfExperience(request.typeOfExperienceId());
+        }
+
+        validateDates(request.startDate(), request.endDate(), request.isCurrent());
+
+        return WorkExperience.builder()
+                .candidate(candidate)
+                .jobTitle(trim(request.jobTitle()))
+                .jobLevel(jobLevel)
+                .companyName(request.companyName().trim())
+                .typeOfExperience(typeOfExperience)
+                .city(trim(request.city()))
+                .country(trim(request.country()))
+                .startDate(request.startDate())
+                .endDate(Boolean.TRUE.equals(request.isCurrent()) ? null : request.endDate())
+                .isCurrent(Boolean.TRUE.equals(request.isCurrent()))
+                .jobResponsibility(request.jobResponsibility())
+                .build();
     }
 }

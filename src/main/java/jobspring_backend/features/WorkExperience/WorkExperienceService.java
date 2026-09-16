@@ -8,6 +8,7 @@ import java.util.List;
 public interface WorkExperienceService {
 
     WorkExperienceResponse create(CreateWorkExperienceRequest request);
+    List<WorkExperienceResponse> createMultiple(List<CreateWorkExperienceRequest> requests);
     List<WorkExperienceResponse> getAll();
     WorkExperienceResponse getById(Long id);
     List<WorkExperienceResponse> getByCandidateId(Long candidateId);

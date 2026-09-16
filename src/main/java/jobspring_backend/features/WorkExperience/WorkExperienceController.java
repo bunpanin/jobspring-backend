@@ -22,6 +22,13 @@ public class WorkExperienceController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.create(request));
     }
 
+    @PostMapping("/multiple")
+    public ResponseEntity<List<WorkExperienceResponse>> createMultiple(@Valid @RequestBody List<CreateWorkExperienceRequest> requests) {
+        return ResponseEntity
+            .status(HttpStatus.CREATED)
+            .body(service.createMultiple(requests));
+    }
+
     @GetMapping
     public ResponseEntity<List<WorkExperienceResponse>> getAll() {
         return ResponseEntity.ok(service.getAll());
