@@ -31,7 +31,7 @@ public class WorkExperience {
     @JoinColumn(name = "job_level_id")
     private JobLevel jobLevel;
 
-    @Column(name = "company_name", length = 100, nullable = false)
+    @Column(name = "company_name", length = 100,nullable = true)
     private String companyName;
 
     @ManyToOne

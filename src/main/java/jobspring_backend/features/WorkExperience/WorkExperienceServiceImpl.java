@@ -153,6 +153,11 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
 
 
     // ------------------- Helper Methods -------------------
+
+    public static String safeTrim(String value) {
+        return value == null ? null : value.trim();
+    }
+
     private WorkExperience findWorkExperience(Long id) {
         return workExperienceRepository.findByWorkExperienceIdAndIsDeletedFalse(id).orElseThrow(() ->
             new ResponseStatusException(
@@ -244,6 +249,8 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
     }
 
     private WorkExperience buildWorkExperience(CreateWorkExperienceRequest request) {
+
+
         Candidate candidate = findCandidate(request.candidateId());
         JobLevel jobLevel = null;
         if (request.jobLevelId() != null) {
@@ -259,13 +266,14 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
 
         return WorkExperience.builder()
                 .candidate(candidate)
-                .jobTitle(trim(request.jobTitle()))
+                .jobTitle(safeTrim(request.jobTitle()))
                 .jobLevel(jobLevel)
-                .companyName(request.companyName().trim())
+                .companyName(safeTrim(request.companyName()))
                 .typeOfExperience(typeOfExperience)
                 .city(trim(request.city()))
-                .country(trim(request.country()))
+                .country(safeTrim(request.country()))
                 .startDate(request.startDate())
+                .createdBy(safeTrim(request.createdBy()))
                 .endDate(Boolean.TRUE.equals(request.isCurrent()) ? null : request.endDate())
                 .isCurrent(Boolean.TRUE.equals(request.isCurrent()))
                 .jobResponsibility(request.jobResponsibility())

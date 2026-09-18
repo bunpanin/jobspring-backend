@@ -1,11 +1,11 @@
 package jobspring_backend.features.Candidate.dto.requests;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 
 public record CreateCandidateRequest(
 
-        @NotNull(message = "User ID is required")
+        @NotBlank(message = "User ID is required")
         String userId,
 
         @Size(max = 20)

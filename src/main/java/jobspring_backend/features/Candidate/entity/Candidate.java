@@ -2,11 +2,15 @@ package jobspring_backend.features.Candidate.entity;
 
 import jakarta.persistence.*;
 import jobspring_backend.features.JobLevel.entity.JobLevel;
+import jobspring_backend.features.Skill.entity.CandidateSkill;
+import jobspring_backend.features.Skill.entity.Skill;
 import jobspring_backend.features.WorkExperience.entity.WorkExperience;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Candidate")
@@ -69,9 +73,13 @@ public class Candidate {
 
     private LocalDate createdAt;
 
-    // Raletionship with WorkExperience
+    // Relationship with WorkExperience
+    
     @OneToMany(mappedBy = "candidate")
     private List<WorkExperience> workExperiences;
+
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CandidateSkill> candidateSkills;
 
     @PrePersist
     public  void  prePersist() {
