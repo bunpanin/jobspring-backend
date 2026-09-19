@@ -2,8 +2,9 @@ package jobspring_backend.features.Language.entity;
 
 import jakarta.persistence.*;
 import jobspring_backend.features.Candidate.entity.Candidate;
-import jobspring_backend.features.Skill.entity.Skill;
+import jobspring_backend.features.LanguageLevel.entity.LanguageLevel;
 import lombok.*;
+
 @Entity
 @Table(name = "candidate_languages")
 @Getter
@@ -25,10 +26,17 @@ public class CandidateLanguage {
     @JoinColumn(name = "language_id", nullable = false)
     private Language language;
 
-//
-    private String description;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "language_level_id", nullable = false)
+    private LanguageLevel languageLevel;
 
     @Column(name = "is_deleted", nullable = false)
     private Boolean isDeleted;
 
+    @PrePersist
+    public void prePersist() {
+        if (isDeleted == null) {
+            isDeleted = false;
+        }
+    }
 }
