@@ -50,11 +50,8 @@ class LanguageServiceImplTest {
             new CreateCandidateLanguageRequest(7L, " English ", 4L)
         );
 
-        assertEquals(21L, result.candidateLanguageId());
         assertEquals(7L, result.candidateId());
-        assertEquals(11L, result.languageId());
         assertEquals("English", result.languageName());
-        assertEquals(4L, result.languageLevelId());
         assertEquals("Fluent", result.languageLevelName());
     }
 
@@ -97,7 +94,7 @@ class LanguageServiceImplTest {
 
         assertFalse(deleted.getIsDeleted());
         assertEquals(advanced, deleted.getLanguageLevel());
-        assertEquals(5L, result.languageLevelId());
+        assertEquals("Advanced", result.languageLevelName());
     }
 
     @Test
@@ -154,7 +151,7 @@ class LanguageServiceImplTest {
         List<CandidateLanguageResponse> result = fixture.service.getByCandidateId(7L);
 
         assertEquals(1, result.size());
-        assertEquals(21L, result.getFirst().candidateLanguageId());
+        assertEquals(7L, result.getFirst().candidateId());
         assertEquals("English", result.getFirst().languageName());
         assertEquals("Fluent", result.getFirst().languageLevelName());
     }

@@ -186,11 +186,11 @@ public class LanguageServiceImpl implements LanguageService {
         Language language = candidateLanguage.getLanguage();
         LanguageLevel languageLevel = candidateLanguage.getLanguageLevel();
         return new CandidateLanguageResponse(
-            candidateLanguage.getId(),
+//            candidateLanguage.getId(),
             candidateLanguage.getCandidate().getCandidateId(),
-            language.getLanguageId(),
+//            language.getLanguageId(),
             language.getLanguageName(),
-            languageLevel.getLanguageLevelId(),
+//            languageLevel.getLanguageLevelId(),
             languageLevel.getLanguageLevelName()
         );
     }

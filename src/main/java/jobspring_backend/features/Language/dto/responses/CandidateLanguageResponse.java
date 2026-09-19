@@ -1,11 +1,11 @@
 package jobspring_backend.features.Language.dto.responses;
 
 public record CandidateLanguageResponse(
-    Long candidateLanguageId,
+//    Long candidateLanguageId,
     Long candidateId,
-    Long languageId,
+//    Long languageId,
     String languageName,
-    Long languageLevelId,
+//    Long languageLevelId,
     String languageLevelName
 ) {
 }
