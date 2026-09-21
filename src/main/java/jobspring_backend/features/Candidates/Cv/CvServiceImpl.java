@@ -45,9 +45,8 @@ public class CvServiceImpl implements CvService {
             .candidate(candidate)
             .originalFileName(file.getOriginalFilename().trim())
             .storedFileName(storedFile.storedFileName())
-            .viewToken(generateViewToken())
+            .view(generateViewToken())
             .contentType(file.getContentType())
-            .fileSize(file.getSize())
             .isPrimary(isPrimary)
             .isDeleted(false)
             .build();
@@ -170,10 +169,9 @@ public class CvServiceImpl implements CvService {
             cv.getCandidate().getCandidateId(),
             cv.getOriginalFileName(),
             cv.getContentType(),
-            cv.getFileSize(),
             cv.isPrimary(),
             cv.getCreatedDate(),
-            "/api/v1/cvs/" + cv.getViewToken() + "/view"
+            "/api/v1/cvs/" + cv.getView() + "/view"
         );
     }
 }

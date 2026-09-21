@@ -36,7 +36,7 @@ public class EducationLevelServiceImpl implements EducationLevelService {
             }
 
             existing.setName(name);
-            existing.setCreatedBy(normalizeOptional(request.createdBy()));
+            existing.setCreatedBy(request.createdBy());
             existing.setCreatedDate(LocalDate.now());
             existing.setDeleted(false);
             return mapToResponse(existing);
@@ -44,7 +44,7 @@ public class EducationLevelServiceImpl implements EducationLevelService {
 
         EducationLevel educationLevel = EducationLevel.builder()
             .name(name)
-            .createdBy(normalizeOptional(request.createdBy()))
+            .createdBy(request.createdBy())
             .isDeleted(false)
             .build();
 

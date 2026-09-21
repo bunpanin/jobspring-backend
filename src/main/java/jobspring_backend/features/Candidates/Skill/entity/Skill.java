@@ -34,8 +34,6 @@ public class Skill {
 //    -- Relationship --
     @OneToMany(mappedBy = "skill")
     private List<CandidateSkill> candidateSkills;
-//    private Set<CandidateSkill> candidateSkills = new HashSet<>();
-
 
     @PrePersist
     public void prePersist() {

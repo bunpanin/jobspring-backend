@@ -3,6 +3,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import jobspring_backend.features.Candidates.Candidate.entity.Candidate;
 
+import java.time.LocalDate;
+
 
 @Entity
 @Table(name = "candidate_skills")
@@ -25,15 +27,20 @@ public class CandidateSkill {
     @JoinColumn(name = "skill_id", nullable = false)
     private Skill skill;
 
+    @Column(name = "description",columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "is_deleted", nullable = false)
+    @Column(name = "created_date",nullable = false)
+    private LocalDate createdDate;
+
+    @Column(name = "is_deleted")
     private Boolean isDeleted;
 
     @PrePersist
     public void prePersist() {
-        if (isDeleted == null) {
-            isDeleted = false;
+        if(createdDate == null){
+            createdDate = LocalDate.now();
         }
+        isDeleted = false;
     }
 }

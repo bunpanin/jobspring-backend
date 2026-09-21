@@ -23,7 +23,7 @@ public class EducationLevel {
     private String name;
 
     @Column(name = "created_by", length = 100)
-    private String createdBy;
+    private Integer createdBy;
 
     @Column(name = "created_date", nullable = false, updatable = false)
     private LocalDate createdDate;

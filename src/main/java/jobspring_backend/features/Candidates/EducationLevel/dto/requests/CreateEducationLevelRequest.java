@@ -7,6 +7,6 @@ public record CreateEducationLevelRequest(
     @NotBlank(message = "Education level name is required")
     @Size(max = 100, message = "Education level name cannot exceed 100 characters")
     String name,
-    String createdBy
+    int createdBy
 ) {
 }

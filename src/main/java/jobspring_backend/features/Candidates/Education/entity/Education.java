@@ -52,9 +52,6 @@ public class Education {
     @Column(name = "is_current", nullable = false)
     private Boolean isCurrent;
 
-    @Column(name = "is_hidden", nullable = false)
-    private Boolean isHidden;
-
     @Column(name = "created_by", length = 100)
     private String createdBy;
 
@@ -71,9 +68,6 @@ public class Education {
         }
         if (isCurrent == null) {
             isCurrent = false;
-        }
-        if (isHidden == null) {
-            isHidden = false;
         }
         isDeleted = false;
     }

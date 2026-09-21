@@ -30,14 +30,11 @@ public class Cv {
     @Column(name = "stored_file_name", nullable = false, unique = true, length = 100)
     private String storedFileName;
 
-    @Column(name = "view_token", nullable = false, unique = true, length = 64)
-    private String viewToken;
+    @Column(name = "view", nullable = false, unique = true, length = 64)
+    private String view;
 
     @Column(name = "content_type", nullable = false, length = 100)
     private String contentType;
-
-    @Column(name = "file_size", nullable = false)
-    private Long fileSize;
 
     @Column(name = "is_primary", nullable = false)
     private boolean isPrimary;

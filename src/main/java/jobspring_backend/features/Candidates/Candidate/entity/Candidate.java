@@ -66,8 +66,10 @@ public class Candidate {
     @Column(columnDefinition = "TEXT", nullable = true)
     private String description;
 
+    @Column(name = "is_deleted")
     private boolean isDeleted;
 
+    @Column(name = "created_at")
     private LocalDate createdAt;
 
     // Relationship with WorkExperience

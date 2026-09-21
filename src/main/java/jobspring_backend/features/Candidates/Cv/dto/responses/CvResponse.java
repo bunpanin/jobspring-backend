@@ -7,7 +7,6 @@ public record CvResponse(
     Long candidateId,
     String originalFileName,
     String contentType,
-    Long fileSize,
     boolean isPrimary,
     LocalDate createdDate,
     String viewUrl

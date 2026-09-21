@@ -62,6 +62,7 @@ public class WorkExperience {
     @Column(name = "created_date")
     private LocalDate createdDate;
 
+    @Column(name = "is_deleted")
     private boolean isDeleted;
 
     @PrePersist
