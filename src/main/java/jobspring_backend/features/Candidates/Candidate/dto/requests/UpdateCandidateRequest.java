@@ -1,0 +1,46 @@
+package jobspring_backend.features.Candidates.Candidate.dto.requests;
+
+import jakarta.validation.constraints.Size;
+
+import java.time.LocalDate;
+
+public record UpdateCandidateRequest(
+
+        @Size(max = 20)
+        String gender,
+
+        @Size(max = 20)
+        String contactNumber,
+
+        LocalDate dateOfBirth,
+
+        @Size(max = 50)
+        String jobTitle,
+
+        Long jobLevelId,
+
+        @Size(max = 50)
+        String industry,
+
+        @Size(max = 100)
+        String address,
+
+        @Size(max = 50)
+        String city,
+
+        @Size(max = 50)
+        String country,
+
+        @Size(max = 50)
+        String githubUsername,
+
+        @Size(max = 50)
+        String linkedinUsername,
+
+        @Size(max = 100)
+        String portfolio,
+
+        String description
+
+) {
+}

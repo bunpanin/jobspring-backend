@@ -1,9 +1,11 @@
 package jobspring_backend.features.LanguageLevel;
 
-import jobspring_backend.features.LanguageLevel.dto.requests.CreateLanguageLevelRequest;
-import jobspring_backend.features.LanguageLevel.dto.requests.UpdateLanguageLevelRequest;
-import jobspring_backend.features.LanguageLevel.dto.responses.LanguageLevelResponse;
-import jobspring_backend.features.LanguageLevel.entity.LanguageLevel;
+import jobspring_backend.features.Candidates.LanguageLevel.LanguageLevelRepository;
+import jobspring_backend.features.Candidates.LanguageLevel.LanguageLevelServiceImpl;
+import jobspring_backend.features.Candidates.LanguageLevel.dto.requests.CreateLanguageLevelRequest;
+import jobspring_backend.features.Candidates.LanguageLevel.dto.requests.UpdateLanguageLevelRequest;
+import jobspring_backend.features.Candidates.LanguageLevel.dto.responses.LanguageLevelResponse;
+import jobspring_backend.features.Candidates.LanguageLevel.entity.LanguageLevel;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;

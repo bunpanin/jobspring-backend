@@ -1,11 +1,14 @@
 package jobspring_backend.features.Skill;
 
-import jobspring_backend.features.Candidate.CandidateRepository;
-import jobspring_backend.features.Candidate.entity.Candidate;
-import jobspring_backend.features.Skill.dto.requests.CreateSkillRequest;
-import jobspring_backend.features.Skill.dto.responses.SkillResponse;
-import jobspring_backend.features.Skill.entity.CandidateSkill;
-import jobspring_backend.features.Skill.entity.Skill;
+import jobspring_backend.features.Candidates.Candidate.CandidateRepository;
+import jobspring_backend.features.Candidates.Candidate.entity.Candidate;
+import jobspring_backend.features.Candidates.Skill.CandidateSkillRepository;
+import jobspring_backend.features.Candidates.Skill.SkillRepository;
+import jobspring_backend.features.Candidates.Skill.SkillServiceImpl;
+import jobspring_backend.features.Candidates.Skill.dto.requests.CreateSkillRequest;
+import jobspring_backend.features.Candidates.Skill.dto.responses.SkillResponse;
+import jobspring_backend.features.Candidates.Skill.entity.CandidateSkill;
+import jobspring_backend.features.Candidates.Skill.entity.Skill;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;

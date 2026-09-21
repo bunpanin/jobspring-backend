@@ -1,11 +1,13 @@
 package jobspring_backend.features.Achievement;
 
-import jobspring_backend.features.Achievement.dto.requests.CreateAchievementRequest;
-import jobspring_backend.features.Achievement.dto.requests.UpdateAchievementRequest;
-import jobspring_backend.features.Achievement.dto.responses.AchievementResponse;
-import jobspring_backend.features.Achievement.entity.Achievement;
-import jobspring_backend.features.Candidate.CandidateRepository;
-import jobspring_backend.features.Candidate.entity.Candidate;
+import jobspring_backend.features.Candidates.Achievement.AchievementRepository;
+import jobspring_backend.features.Candidates.Achievement.AchievementServiceImpl;
+import jobspring_backend.features.Candidates.Achievement.dto.requests.CreateAchievementRequest;
+import jobspring_backend.features.Candidates.Achievement.dto.requests.UpdateAchievementRequest;
+import jobspring_backend.features.Candidates.Achievement.dto.responses.AchievementResponse;
+import jobspring_backend.features.Candidates.Achievement.entity.Achievement;
+import jobspring_backend.features.Candidates.Candidate.CandidateRepository;
+import jobspring_backend.features.Candidates.Candidate.entity.Candidate;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;

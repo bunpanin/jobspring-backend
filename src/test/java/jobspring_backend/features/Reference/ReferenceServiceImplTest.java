@@ -1,11 +1,13 @@
 package jobspring_backend.features.Reference;
 
-import jobspring_backend.features.Candidate.CandidateRepository;
-import jobspring_backend.features.Candidate.entity.Candidate;
-import jobspring_backend.features.Reference.dto.requests.CreateReferenceRequest;
-import jobspring_backend.features.Reference.dto.requests.UpdateReferenceRequest;
-import jobspring_backend.features.Reference.dto.responses.ReferenceResponse;
-import jobspring_backend.features.Reference.entity.Reference;
+import jobspring_backend.features.Candidates.Candidate.CandidateRepository;
+import jobspring_backend.features.Candidates.Candidate.entity.Candidate;
+import jobspring_backend.features.Candidates.Reference.ReferenceRepository;
+import jobspring_backend.features.Candidates.Reference.ReferenceServiceImpl;
+import jobspring_backend.features.Candidates.Reference.dto.requests.CreateReferenceRequest;
+import jobspring_backend.features.Candidates.Reference.dto.requests.UpdateReferenceRequest;
+import jobspring_backend.features.Candidates.Reference.dto.responses.ReferenceResponse;
+import jobspring_backend.features.Candidates.Reference.entity.Reference;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;

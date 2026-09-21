@@ -1,14 +1,17 @@
 package jobspring_backend.features.Language;
 
-import jobspring_backend.features.Candidate.CandidateRepository;
-import jobspring_backend.features.Candidate.entity.Candidate;
-import jobspring_backend.features.Language.dto.requests.CreateCandidateLanguageRequest;
-import jobspring_backend.features.Language.dto.requests.UpdateCandidateLanguageRequest;
-import jobspring_backend.features.Language.dto.responses.CandidateLanguageResponse;
-import jobspring_backend.features.Language.entity.CandidateLanguage;
-import jobspring_backend.features.Language.entity.Language;
-import jobspring_backend.features.LanguageLevel.LanguageLevelRepository;
-import jobspring_backend.features.LanguageLevel.entity.LanguageLevel;
+import jobspring_backend.features.Candidates.Candidate.CandidateRepository;
+import jobspring_backend.features.Candidates.Candidate.entity.Candidate;
+import jobspring_backend.features.Candidates.Language.CandidateLanguageRepository;
+import jobspring_backend.features.Candidates.Language.LanguageRepository;
+import jobspring_backend.features.Candidates.Language.LanguageServiceImpl;
+import jobspring_backend.features.Candidates.Language.dto.requests.CreateCandidateLanguageRequest;
+import jobspring_backend.features.Candidates.Language.dto.requests.UpdateCandidateLanguageRequest;
+import jobspring_backend.features.Candidates.Language.dto.responses.CandidateLanguageResponse;
+import jobspring_backend.features.Candidates.Language.entity.CandidateLanguage;
+import jobspring_backend.features.Candidates.Language.entity.Language;
+import jobspring_backend.features.Candidates.LanguageLevel.LanguageLevelRepository;
+import jobspring_backend.features.Candidates.LanguageLevel.entity.LanguageLevel;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
