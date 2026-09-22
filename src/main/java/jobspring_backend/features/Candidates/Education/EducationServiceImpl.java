@@ -127,9 +127,6 @@ public class EducationServiceImpl implements EducationService {
         if (request.country() != null) {
             education.setCountry(normalizeOptional(request.country()));
         }
-        if (request.isHidden() != null) {
-            education.setIsHidden(request.isHidden());
-        }
 
         return mapToResponse(education);
     }
@@ -162,7 +159,6 @@ public class EducationServiceImpl implements EducationService {
             .startDate(request.startDate())
             .endDate(endDate)
             .isCurrent(isCurrent)
-            .isHidden(Boolean.TRUE.equals(request.isHidden()))
             .createdBy(normalizeOptional(request.createdBy()))
             .isDeleted(false)
             .build();
@@ -254,7 +250,6 @@ public class EducationServiceImpl implements EducationService {
             education.getStartDate(),
             education.getEndDate(),
             education.getIsCurrent(),
-            education.getIsHidden(),
             education.getCreatedBy(),
             education.getCreatedDate()
         );

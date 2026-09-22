@@ -16,5 +16,5 @@ public interface CvRepository extends JpaRepository<Cv, Long> {
 
     Optional<Cv> findByCvIdAndIsDeletedFalse(Long cvId);
 
-    Optional<Cv> findByViewTokenAndIsDeletedFalse(String viewToken);
+    Optional<Cv> findByViewAndIsDeletedFalse(String viewToken);
 }

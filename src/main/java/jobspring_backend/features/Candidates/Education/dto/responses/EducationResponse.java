@@ -15,7 +15,6 @@ public record EducationResponse(
     LocalDate startDate,
     LocalDate endDate,
     Boolean isCurrent,
-    Boolean isHidden,
     String createdBy,
     LocalDate createdDate
 ) {

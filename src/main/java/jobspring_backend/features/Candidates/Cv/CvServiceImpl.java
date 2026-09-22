@@ -106,7 +106,7 @@ public class CvServiceImpl implements CvService {
     @Transactional(readOnly = true)
     public CvDownload view(String viewToken) {
         Cv cv = cvRepository
-            .findByViewTokenAndIsDeletedFalse(viewToken)
+            .findByViewAndIsDeletedFalse(viewToken)
             .orElseThrow(() -> new ResponseStatusException(
                 HttpStatus.NOT_FOUND,
                 "CV not found"

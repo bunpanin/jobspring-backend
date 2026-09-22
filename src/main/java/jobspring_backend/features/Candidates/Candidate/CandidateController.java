@@ -15,10 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CandidateController {
 
-    private final CandidateService service;
-
     private final CandidateService candidateService;
-
 
     @PostMapping
     public ResponseEntity<CandidateResponse> create(@Valid @RequestBody CreateCandidateRequest request) {
