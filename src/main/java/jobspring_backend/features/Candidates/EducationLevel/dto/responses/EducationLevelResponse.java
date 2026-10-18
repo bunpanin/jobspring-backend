@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public record EducationLevelResponse(
     Long educationLevelId,
     String name,
-    int createdBy,
+    String createdBy,
     LocalDate createdDate,
     boolean isDeleted
 ) {
