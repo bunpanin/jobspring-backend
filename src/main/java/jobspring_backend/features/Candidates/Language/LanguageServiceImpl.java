@@ -188,7 +188,7 @@ public class LanguageServiceImpl implements LanguageService {
         return new CandidateLanguageResponse(
 //            candidateLanguage.getId(),
             candidateLanguage.getCandidate().getCandidateId(),
-//            language.getLanguageId(),
+            language.getLanguageId(),
             language.getLanguageName(),
 //            languageLevel.getLanguageLevelId(),
             languageLevel.getLanguageLevelName()
